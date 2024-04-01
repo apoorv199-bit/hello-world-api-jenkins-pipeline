@@ -2,20 +2,23 @@ pipeline {
     agent any
 
     environment {
-        JAVA_HOME=tool 'jdk17'
-        MAVEN_HOME=tool 'maven'
+        MAVEN_HOME = tool 'maven'
+    }
+
+    tools {
+        jdk 'jdk17'
     }
 
     stages {
         stage("Build"){
             steps{
-                sh 'mvn clean install'
+                bat "mvn clean install -DskipTests"
             }
         }
 
         stage("Test"){
             steps{
-                sh 'mvn test'
+                bat "mvn test"
             }
         }
     }
